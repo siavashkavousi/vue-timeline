@@ -1,14 +1,27 @@
 <template>
-  <div class="timeline">
-    <slot></slot>
+  <div
+    class="timeline"
+    :style="style">
+    <div
+      class="timeline--before"
+      :class="{
+        'timeline--before--right': orientation === 'right',
+        'timeline--before--left': orientation === 'left'}"
+    />
+    <slot :orientation="orientation"/>
+    <div class="timeline--after"/>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'timeline',
-
-    props: {},
+    props: {
+      orientation: {
+        type: String,
+        default: 'left',
+      },
+      style: Object,
+    },
   }
 </script>
 
@@ -34,5 +47,11 @@
       display: table;
       clear: both;
     }
+  }
+  .timeline--before--left {
+    left: 16px;
+  }
+  .timeline--before--right {
+    right: 14px;
   }
 </style>
